@@ -1,4 +1,0 @@
-export const CLEAR_RESUME = 'CLEAR_RESUME';
-export const CHANGE_RESUME_TEXT = 'CHANGE_RESUME_TEXT';
-export const CLEAR_JOB = 'CLEAR_JOB';
-export const CHANGE_JOB_TEXT = 'CHANGE_JOB_TEXT';
