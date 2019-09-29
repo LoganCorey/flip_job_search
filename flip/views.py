@@ -31,7 +31,7 @@ def handler404(request, exception, template_name="404.html"):
     return response
 
 
-def handler500(request, exception):
+def handler500(request):
     response = render_to_response("500.html")
     response.status_code = 500
     return response
