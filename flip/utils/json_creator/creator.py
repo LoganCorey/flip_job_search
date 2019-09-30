@@ -9,11 +9,20 @@ def createJson(job_text: str, resume_text: str):
     :return:
     """
 
+    # Somethign is wrong in this area
     processor = BasicProcessing()
     job_text_frequencies = processor.process(job_text)
     resume_text_frequencies = processor.process(resume_text)
-
-
+    ####
+    job_skills = spacy_match(job_text,job_text_frequencies)
+    resume_skills = spacy_match(resume_text, resume_text_frequencies)
+    match_rate = int(job_skills.compare(resume_skills) * 100)
+    skills_dictionary = {
+        'job_skills': job_skills.skills,
+        'resume_skills': resume_skills.skills,
+        'match_rate': match_rate,
+    }
+    """
     skills_dictionary = {
         "job_skills":{
             "logan":1
@@ -23,4 +32,5 @@ def createJson(job_text: str, resume_text: str):
         },
         'match_rate':100
     }
+    """
     return skills_dictionary
