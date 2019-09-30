@@ -7,7 +7,7 @@ from nltk.probability import FreqDist
 from typing import List
 from flip.utils.processor.process_strategy import ProcessStrategy
 
-#nltk.download('stopwords')
+nltk.download('stopwords')
 
 
 class BasicProcessing(ProcessStrategy):
@@ -29,9 +29,9 @@ class BasicProcessing(ProcessStrategy):
         Removes stop words from text.  This is done so that only impactful words are being
         check and not words like 'the'
         """
-        #stop_words = stopwords.words("english")
-        #trimmed_list = [word for word in tokenized_text if word not in stop_words]
-        #return trimmed_list
+        stop_words = stopwords.words("english")
+        trimmed_list = [word for word in tokenized_text if word not in stop_words]
+        return trimmed_list
         pass
 
     def process(self, text: str) -> FreqDist:
@@ -39,6 +39,6 @@ class BasicProcessing(ProcessStrategy):
         Processes text by removing stop words and putting it into a tuple of (word, occurence)
         """
         tokenized_text = self._tokenize(text)
-        #trimmed_text = self._remove_excess(tokenized_text)
-        fdist = FreqDist(tokenized_text)
+        trimmed_text = self._remove_excess(tokenized_text)
+        fdist = FreqDist(trimmed_text)
         return fdist
