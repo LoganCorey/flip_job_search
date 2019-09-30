@@ -11,7 +11,11 @@ class BasicProcessTests(unittest.TestCase):
 
     def test_remove_excess(self):
         text = ["hello", "world"]
-        self.assertEqual(self.bp_remove_excess(text), ['hello', 'world'])
+        self.assertEqual(self.bp._remove_excess(text), ['hello', 'world'])
+
+    def test_oricess(self):
+        text = ["hello", "world"]
+        self.assertEqual(self.bp.process(text), ['hello', 'world'])
 
 
 
