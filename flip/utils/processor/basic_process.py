@@ -20,7 +20,6 @@ class BasicProcessing(ProcessStrategy):
         """
         Tokenizes the text so that the nltk library can be used for manipulations
         """
-        text = text.replace(",", "")
         tokenized_text = nltk.word_tokenize(text)
         return tokenized_text
 
