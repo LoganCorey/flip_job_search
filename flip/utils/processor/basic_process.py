@@ -32,7 +32,6 @@ class BasicProcessing(ProcessStrategy):
         stop_words = stopwords.words("english")
         trimmed_list = [word for word in tokenized_text if word not in stop_words]
         return trimmed_list
-        pass
 
     def process(self, text: str) -> FreqDist:
         """
