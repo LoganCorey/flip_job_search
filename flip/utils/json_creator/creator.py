@@ -1,5 +1,5 @@
 from flip.utils.processor.basic_process import BasicProcessing
-from flip.utils.matcher.skill_matcher import  SkillSet, match
+from flip.utils.matcher.skill_matcher import  SkillSet, match, spacy_match
 
 
 def createJson(job_text: str, resume_text: str):
@@ -13,8 +13,8 @@ def createJson(job_text: str, resume_text: str):
     job_text_frequencies = processor.process(job_text)
     resume_text_frequencies = processor.process(resume_text)
 
-    job_skills = match(job_text_frequencies)
-    resume_skills = match(resume_text_frequencies)
+    job_skills = spacy_match(job_text,job_text_frequencies)
+    resume_skills = spacy_match(resume_text, resume_text_frequencies)
     match_rate = int(job_skills.compare(resume_skills) * 100)
     skills_dictionary = {
         'job_skills': job_skills.skills,

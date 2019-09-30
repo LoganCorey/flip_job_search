@@ -15,7 +15,7 @@ class SkillListCreate(generics.ListCreateAPIView):
 @api_view(['POST'])
 def compare(request):
     if request.method == "POST":
-
+        # remove database connection and check if still error 500
         job_text = request.data.get('job_text')
         resume_text = request.data.get('resume_text')
         dic = createJson(job_text, resume_text)
