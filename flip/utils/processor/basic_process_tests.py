@@ -1,5 +1,5 @@
 import unittest
-from flip.utils.basic_process import basic_process
+from flip.utils.processor.basic_process import basic_process
 
 class BasicProcessTests(unittest.TestCase):
     def setUp(self):
