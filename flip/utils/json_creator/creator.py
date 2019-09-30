@@ -9,6 +9,10 @@ def createJson(job_text: str, resume_text: str):
     :return:
     """
 
+    processor = BasicProcessing()
+    job_text_frequencies = processor.process(job_text)
+    resume_text_frequencies = processor.process(resume_text)
+
 
     skills_dictionary = {
         "job_skills":{
