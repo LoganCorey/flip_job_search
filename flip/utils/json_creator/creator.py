@@ -8,12 +8,9 @@ def createJson(job_text: str, resume_text: str):
     :param resume_text:
     :return:
     """
-
-    # Somethign is wrong in this area
     processor = BasicProcessing()
     job_text_frequencies = processor.process(job_text)
     resume_text_frequencies = processor.process(resume_text)
-    ####
     job_skills = spacy_match(job_text,job_text_frequencies)
     resume_skills = spacy_match(resume_text, resume_text_frequencies)
     match_rate = int(job_skills.compare(resume_skills) * 100)
