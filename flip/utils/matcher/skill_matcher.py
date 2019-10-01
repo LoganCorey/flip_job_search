@@ -3,9 +3,6 @@ import os.path
 from typing import List, Tuple, Dict
 from flashtext import KeywordProcessor
 from nltk.probability import FreqDist
-from spacy.matcher import Matcher
-from spacy.matcher import PhraseMatcher
-
 
 class SkillSet:
     def __init__(self, skills: Dict[str, int]):
@@ -72,17 +69,7 @@ def fill_index(nlp, filename="./all_linked_skills.txt"):
     matcher.add("TerminologyList", None, *patterns)
     return matcher
 
-def spacy_match(text, frequencies: FreqDist) -> SkillSet:
-    nlp = spacy.load("en_core_web_sm")
-    #matcher = fill_index(nlp)
-    #doc = nlp(text)
-    #matches = matcher(doc)
-    skill_dictionary = {}
-    #for match_id, start, end in matches:
-    #    string_id = nlp.vocab.strings[match_id]  # Get string representation
-    #    span = doc[start:end]  # The matched span
-    #    skill_dictionary[span.text.lower()] = frequencies[span.text.lower()]
-    return SkillSet(skill_dictionary)
+
 
 def flash_match(text, frequencies: FreqDist) ->SkillSet:
     keyword_processor = KeywordProcessor()
