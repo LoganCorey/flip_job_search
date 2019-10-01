@@ -1,7 +1,7 @@
 import spacy
 import os.path
 from typing import List, Tuple, Dict
-
+from flashtext import KeywordProcessor
 from nltk.probability import FreqDist
 from spacy.matcher import Matcher
 from spacy.matcher import PhraseMatcher
@@ -74,7 +74,7 @@ def fill_index(nlp, filename="./all_linked_skills.txt"):
 
 def spacy_match(text, frequencies: FreqDist) -> SkillSet:
     nlp = spacy.load("en_core_web_sm")
-    matcher = fill_index(nlp)
+    #matcher = fill_index(nlp)
     #doc = nlp(text)
     #matches = matcher(doc)
     skill_dictionary = {}
@@ -83,3 +83,14 @@ def spacy_match(text, frequencies: FreqDist) -> SkillSet:
     #    span = doc[start:end]  # The matched span
     #    skill_dictionary[span.text.lower()] = frequencies[span.text.lower()]
     return SkillSet(skill_dictionary)
+
+def flash_match(text, frequencies: FreqDist) ->SkillSet:
+    keyword_processor = KeywordProcessor()
+    with open('list.pkl', 'rb') as fs:
+        my_list = pickle.load(fs)
+    keyword_processor.add_keywords_from_list(my_list)
+    matches =  keyword_processor.extract_keywords(text)
+    skill_dictionary = {}
+    for match in matches:
+        skill_dictionary[match] = frequencies[match]
+    return SkilLSet(skill_dictionary)

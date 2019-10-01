@@ -12,5 +12,4 @@ six==1.12.0
 sqlparse==0.3.0
 whitenoise==4.1.4
 python-dotenv==0.10.3
-spacy==2.1.8
-https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.1.0/en_core_web_sm-2.1.0.tar.gz
+flashtext == 2.7
