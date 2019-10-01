@@ -75,7 +75,12 @@ def flash_match(text, frequencies: FreqDist) ->SkillSet:
     keyword_processor = KeywordProcessor()
     #with open('list.pkl', 'rb') as fs:
     #    my_list = pickle.load(fs)
-    my_list = ['ubuntu']
+    my_list = []
+    with open('./all_linked_skills.txt','r', encoding='utf-8') as fs:
+        for line in fs.readlines():
+            skill = line.strip("\n").lower()
+            my_list.append(skill)
+
     keyword_processor.add_keywords_from_list(my_list)
     matches =  keyword_processor.extract_keywords(text)
     skill_dictionary = {}
