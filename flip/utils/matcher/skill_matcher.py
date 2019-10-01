@@ -74,7 +74,7 @@ def fill_index(nlp, filename="./all_linked_skills.txt"):
 
 def spacy_match(text, frequencies: FreqDist) -> SkillSet:
     nlp = spacy.load("en_core_web_sm")
-    #matcher = fill_index(nlp)
+    matcher = fill_index(nlp)
     #doc = nlp(text)
     #matches = matcher(doc)
     skill_dictionary = {}
