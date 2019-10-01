@@ -1,4 +1,3 @@
-import spacy
 import os.path
 from typing import List, Tuple, Dict
 from flashtext import KeywordProcessor
