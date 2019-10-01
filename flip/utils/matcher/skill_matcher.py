@@ -6,7 +6,7 @@ from typing import List, Tuple, Dict
 from nltk.probability import FreqDist
 from spacy.matcher import Matcher
 from spacy.matcher import PhraseMatcher
-from basic_process import BasicProcessing
+from flip.utils.processor.basic_process import BasicProcessing
 
 
 class SkillSet:
