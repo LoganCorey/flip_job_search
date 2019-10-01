@@ -91,9 +91,9 @@ def load_pickle():
 def spacy_match(text, frequencies: FreqDist) -> SkillSet:
     nlp = spacy.load("en_core_web_sm")
     matcher = None
-    dir_path = os.path.dirname(os.path.realpath(__file__))
-    dir_path = dir_path.join("all_linked_skills.txt")
-    matcher = fill_index(nlp, dir_path)
+    dir_path = os.path.dirname(os.path.realpath(__file__)).join("all_linked_skills.txt")
+    print(dir_path)
+    matcher = fill_index(nlp)
     doc = nlp(text)
     matches = matcher(doc)
     skill_dictionary = {}
