@@ -1,13 +1,10 @@
-import pickle
 import spacy
 import os.path
-import os
 from typing import List, Tuple, Dict
 
 from nltk.probability import FreqDist
 from spacy.matcher import Matcher
 from spacy.matcher import PhraseMatcher
-from flip.utils.processor.basic_process import BasicProcessing
 
 
 class SkillSet:
@@ -71,28 +68,12 @@ def fill_index(nlp, filename="./all_linked_skills.txt"):
         for line in fs.readlines():
             skill = line.strip("\n").lower()
             key_words.append(skill)
-            #pattern = [{"LOWER":skill}]
-            #matcher.add(skill,None, pattern)
     patterns = [nlp.make_doc(text) for text in key_words]
     matcher.add("TerminologyList", None, *patterns)
     return matcher
-    #return matcher
-
-def save_pickle(patterns):
-    with open("my_pickle.obj", "wb") as ps:
-        pickle.dump(patterns, ps)
-
-def load_pickle():
-    patterns = None
-    with open("my_pickle.obj", "rb") as ps:
-        patterns = pickle.load(ps)
-    return patterns
 
 def spacy_match(text, frequencies: FreqDist) -> SkillSet:
     nlp = spacy.load("en_core_web_sm")
-    matcher = None
-    #dir_path = os.path.dirname(os.path.realpath(__file__)).join("all_linked_skills.txt")
-    #print(dir_path)
     matcher = fill_index(nlp)
     doc = nlp(text)
     matches = matcher(doc)
@@ -102,21 +83,3 @@ def spacy_match(text, frequencies: FreqDist) -> SkillSet:
         span = doc[start:end]  # The matched span
         skill_dictionary[span.text.lower()] = frequencies[span.text.lower()]
     return SkillSet(skill_dictionary)
-
-if __name__ == "__main__":
-    bp = BasicProcessing()
-    text = u"""
-    Utilize and test the system, customizing it as required to meet user requirements
-    Define, analyze and resolve technical issues in addition to developing program specs.
-    Maintain and execute test plans and functional test scripts for new and modified components
-    Participate in code and configuration review processes
-    Conduct post-implementation reviews and provide technical support and problem resolution as required.
-    Be involved in all aspects of the application development lifecycle
-    3+ years of experience building Java on Linux
-    Familiarity with distributed systems like Spar/Storm
-    Experience building REST API's and connecting to SQL Server Security Administration
-    Passion for learning
-    """
-
-    tokenized = bp.process(text)
-    print(spacy_match(text, tokenized))
