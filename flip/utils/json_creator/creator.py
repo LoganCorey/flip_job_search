@@ -11,7 +11,9 @@ def createJson(job_text: str, resume_text: str):
     processor = BasicProcessing()
     job_text_frequencies = processor.process(job_text)
     resume_text_frequencies = processor.process(resume_text)
-
+    job_skills = spacy_match(job_text,job_text_frequencies)
+    resume_skills = spacy_match(resume_text, resume_text_frequencies)
+    #match_rate = int(job_skills.compare(resume_skills) * 100)
     """
     skills_dictionary = {
         'job_skills': job_skills.skills,
