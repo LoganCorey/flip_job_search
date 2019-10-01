@@ -80,4 +80,4 @@ def flash_match(text, frequencies: FreqDist) ->SkillSet:
     skill_dictionary = {}
     for match in matches:
         skill_dictionary[match] = frequencies[match]
-    return SkilLSet(skill_dictionary)
+    return SkillSet(skill_dictionary)
