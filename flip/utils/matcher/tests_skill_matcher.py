@@ -1,5 +1,5 @@
 import unittest
-from flip.utils.matcher.skill_matcher import SkillSet
+from flip.utils.matcher.skill_matcher import SkillSet, spacy_match
 
 class MyTestCase(unittest.TestCase):
     def test_something(self):

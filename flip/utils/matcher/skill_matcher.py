@@ -2,10 +2,12 @@ import pickle
 import spacy
 import os.path
 from typing import List, Tuple, Dict
-from flip.models import Skill
+
 from nltk.probability import FreqDist
 from spacy.matcher import Matcher
 from spacy.matcher import PhraseMatcher
+from basic_process import BasicProcessing
+
 
 class SkillSet:
     def __init__(self, skills: Dict[str, int]):
@@ -53,7 +55,7 @@ def match(frequencies: FreqDist) -> SkillSet:
     all_words = [word for word in frequencies.keys()]
 
     # query any matching skills
-    matched_words = Skill.objects.filter(name__in=all_words)
+    #matched_words = Skill.objects.filter(name__in=all_words)
     # create dictionary to be used in SkillSet object
 
     skill_dictionary = {}
@@ -75,31 +77,43 @@ def fill_index(nlp, filename="all_linked_skills.txt"):
     return matcher
     #return matcher
 
-def save_pickle(matcher):
-    with open("my_pickle", "wb") as ps:
-        pickle.dump(matcher, ps)
+def save_pickle(patterns):
+    with open("my_pickle.obj", "wb") as ps:
+        pickle.dump(patterns, ps)
 
 def load_pickle():
-    matcher = None
-    with open("my_pickle", "rb") as ps:
-        matcher = pickle.load(ps)
-    return matcher
+    patterns = None
+    with open("my_pickle.obj", "rb") as ps:
+        patterns = pickle.load(ps)
+    return patterns
 
 def spacy_match(text, frequencies: FreqDist) -> SkillSet:
-    # create a list of every word to be used in the query
-    all_words = [word for word in frequencies.keys()]
     nlp = spacy.load("en_core_web_sm")
     matcher = None
-    if not os.path.exists("my_pickle"):
-        matcher = fill_index(nlp)
-        save_pickle(matcher)
-
-    else:
-        matcher = load_pickle()
-    matches = matcher(text)
+    matcher = fill_index(nlp)
+    doc = nlp(text)
+    matches = matcher(doc)
     skill_dictionary = {}
     for match_id, start, end in matches:
         string_id = nlp.vocab.strings[match_id]  # Get string representation
         span = doc[start:end]  # The matched span
-        skill_dictionary[span.text] = frequencies[skill.text]
+        skill_dictionary[span.text.lower()] = frequencies[span.text.lower()]
     return SkillSet(skill_dictionary)
+
+if __name__ == "__main__":
+    bp = BasicProcessing()
+    text = u"""
+    Utilize and test the system, customizing it as required to meet user requirements
+    Define, analyze and resolve technical issues in addition to developing program specs.
+    Maintain and execute test plans and functional test scripts for new and modified components
+    Participate in code and configuration review processes
+    Conduct post-implementation reviews and provide technical support and problem resolution as required.
+    Be involved in all aspects of the application development lifecycle
+    3+ years of experience building Java on Linux
+    Familiarity with distributed systems like Spar/Storm
+    Experience building REST API's and connecting to SQL Server Security Administration
+    Passion for learning
+    """
+
+    tokenized = bp.process(text)
+    print(spacy_match(text, tokenized))
