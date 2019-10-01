@@ -21,7 +21,6 @@ def createJson(job_text: str, resume_text: str):
         'match_rate': match_rate,
     }
     """
-
     skills_dictionary = {
         "job_skills":{
             "logan":1
@@ -31,6 +30,7 @@ def createJson(job_text: str, resume_text: str):
         },
         'match_rate':100
     }
+
 
     return skills_dictionary
 
