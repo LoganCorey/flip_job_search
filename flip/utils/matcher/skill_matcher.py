@@ -92,7 +92,7 @@ def spacy_match(text, frequencies: FreqDist) -> SkillSet:
     nlp = spacy.load("en_core_web_sm")
     matcher = None
     dir_path = os.path.dirname(os.path.realpath(__file__))
-    dir_path.join("all_linked_skills.txt")
+    dir_path = dir_path.join("all_linked_skills.txt")
     matcher = fill_index(nlp, dir_path)
     doc = nlp(text)
     matches = matcher(doc)
