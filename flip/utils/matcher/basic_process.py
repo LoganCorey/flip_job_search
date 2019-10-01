@@ -2,12 +2,12 @@
 
 """
 import nltk
+nltk.download('stopwords')
 from nltk.corpus import stopwords
 from nltk.probability import FreqDist
 from typing import List
 from process_strategy import ProcessStrategy
 
-nltk.download('stopwords')
 
 
 class BasicProcessing(ProcessStrategy):
@@ -18,14 +18,16 @@ class BasicProcessing(ProcessStrategy):
 
     def _tokenize(self, text: str) -> List:
         """
-        Tokenizes the text so that the nltk library can be used for manipulations
+        Tokenizes the text so that the nltk library can be used for
+         manipulations
         """
         tokenized_text = nltk.word_tokenize(text)
         return tokenized_text
 
     def _remove_excess(self, tokenized_text: List[str]) -> List:
         """
-        Removes stop words from text.  This is done so that only impactful words are being
+        Removes stop words from text.  This is done so that only impactful
+        words are being
         check and not words like 'the'
         """
         stop_words = stopwords.words("english")
@@ -34,7 +36,8 @@ class BasicProcessing(ProcessStrategy):
 
     def process(self, text: str) -> FreqDist:
         """
-        Processes text by removing stop words and putting it into a tuple of (word, occurence)
+        Processes text by removing stop words and putting it into a tuple of
+         (word, occurence)
         """
         tokenized_text = self._tokenize(text)
         trimmed_text = self._remove_excess(tokenized_text)
