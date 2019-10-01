@@ -73,8 +73,9 @@ def fill_index(nlp, filename="./all_linked_skills.txt"):
 
 def flash_match(text, frequencies: FreqDist) ->SkillSet:
     keyword_processor = KeywordProcessor()
-    with open('list.pkl', 'rb') as fs:
-        my_list = pickle.load(fs)
+    #with open('list.pkl', 'rb') as fs:
+    #    my_list = pickle.load(fs)
+    my_list = ['ubuntu']
     keyword_processor.add_keywords_from_list(my_list)
     matches =  keyword_processor.extract_keywords(text)
     skill_dictionary = {}
