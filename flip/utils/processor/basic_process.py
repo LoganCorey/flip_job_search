@@ -7,8 +7,6 @@ from nltk.probability import FreqDist
 from typing import List
 from flip.utils.processor.process_strategy import ProcessStrategy
 
-nltk.download('stopwords')
-
 
 class BasicProcessing(ProcessStrategy):
     """
