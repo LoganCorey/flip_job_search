@@ -1,7 +1,8 @@
+import os.path
+import pickle
 from typing import List, Tuple, Dict
-from flip.models import Skill
+from flashtext import KeywordProcessor
 from nltk.probability import FreqDist
-
 
 class SkillSet:
     def __init__(self, skills: Dict[str, int]):
@@ -49,7 +50,7 @@ def match(frequencies: FreqDist) -> SkillSet:
     all_words = [word for word in frequencies.keys()]
 
     # query any matching skills
-    matched_words = Skill.objects.filter(name__in=all_words)
+    #matched_words = Skill.objects.filter(name__in=all_words)
     # create dictionary to be used in SkillSet object
 
     skill_dictionary = {}
@@ -57,8 +58,33 @@ def match(frequencies: FreqDist) -> SkillSet:
         skill_dictionary[skill.name] = frequencies[skill.name]
     return SkillSet(skill_dictionary)
 
+def fill_index(nlp, filename="./all_linked_skills.txt"):
+    matcher = PhraseMatcher(nlp.vocab)
+    key_words = []
+    with open(filename, "r", encoding="utf-8") as fs:
+        for line in fs.readlines():
+            skill = line.strip("\n").lower()
+            key_words.append(skill)
+    patterns = [nlp.make_doc(text) for text in key_words]
+    matcher.add("TerminologyList", None, *patterns)
+    return matcher
 
 
 
+def flash_match(text, frequencies: FreqDist, filename='all_linked_skills.txt') ->SkillSet:
+    keyword_processor = KeywordProcessor()
+    #with open('list.pkl', 'rb') as fs:
+    #    my_list = pickle.load(fs)
+    my_list = []
+    with open(filename,'r', encoding='utf-8') as fs:
+        for line in fs.readlines():
+            skill = line.strip("\n").lower()
+            my_list.append(skill)
 
-
+    keyword_processor.add_keywords_from_list(my_list)
+    matches =  keyword_processor.extract_keywords(text)
+    skill_dictionary = {}
+    for match in matches:
+        if frequencies[match] > 0:
+            skill_dictionary[match] = frequencies[match]
+    return SkillSet(skill_dictionary)

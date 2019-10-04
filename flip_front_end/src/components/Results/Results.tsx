@@ -2,7 +2,7 @@ import React from 'react';
 import KeywordsSection from './KeywordsSection/KeywordsSection';
 import Typography from '@material-ui/core/Typography';
 import MatchRate from './MatchRate/MatchRate';
-import {makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { connect } from 'react-redux';
 // @ts-ignore
@@ -18,8 +18,8 @@ const useStyles = makeStyles({
     marginRight: 'auto',
   },
 
-  title:{
-    fontWeight:500,
+  title: {
+    fontWeight: 500,
   }
 });
 

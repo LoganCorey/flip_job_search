@@ -19,7 +19,7 @@ from django.views.generic import TemplateView
 
 
 handler404 = 'flip.views.handler404'
-handler500 = 'my_app.views.handler500'
+handler500 = 'flip.views.handler500'
 
 urlpatterns = [
     path('admin/', admin.site.urls),

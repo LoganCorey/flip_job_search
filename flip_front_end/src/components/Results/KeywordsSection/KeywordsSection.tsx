@@ -322,7 +322,8 @@ const KeywordsSection = (props: any) => {
             </Typography>
             <Typography variant={"h6"} component="h6" align={"left"}
                         style={{marginBottom: '20px', fontWeight: 500, color: 'rgba(0,0,0,0.5)'}}>
-                Hover over any of the column names to sort the column
+                Make sure you target these skills because this is what can get
+                you through the matching algorithm. Hover over any of the column names to sort the column
             </Typography>
             <div className={classes.root}>
                 <Paper className={classes.paper}>
