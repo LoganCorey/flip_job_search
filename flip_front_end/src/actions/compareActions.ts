@@ -5,31 +5,38 @@ import axios from 'axios';
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 // Saves the result from compare
-export const saveResult = (res:any) => {
-    console.log(res);
-
-    return{
-        type:actionTypes.COMPARE,
-        payload:res['data']
-    }
+export const saveResult = (res: any) => {
+  return {
+    type: actionTypes.COMPARE,
+    payload: res['data']
+  }
 };
 
+const loading = () => {
+  return {
+    type: actionTypes.LOADING
+  }
+}
 
-export function compare(resume_text:string, job_text:string ){
+export function compare(resume_text: string, job_text: string) {
 
-     let data = new FormData();
-     data.append("job_text",job_text);
-     data.append("resume_text",resume_text);
-    return (dispatch:any) =>{
-           axios.post('/api/skill/compare/', data)
-  .then(function (response) {
-      console.log(response);
-      dispatch(saveResult((response)))
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-           
-    }
+  let data = new FormData();
+  data.append("job_text", job_text);
+  data.append("resume_text", resume_text);
+
+  return (dispatch: any) => {
+    dispatch(loading());
+    axios.post('/api/skill/compare/', data)
+      .then(function(response) {
+        console.log(response);
+        dispatch(saveResult((response)))
+        dispatch(loading());
+      })
+      .catch(function(error) {
+        dispatch(loading());
+        console.log(error);
+      });
+
+  }
 
 }

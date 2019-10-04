@@ -5,6 +5,7 @@ const initialState = {
     jobPostingSkills: {},
     scanned: false,
     scanText: "compare",
+    loading:false,
     rating: 0,
 };
 
@@ -16,8 +17,16 @@ const reducer = (state = initialState, action: any) => {
             resumeSkills: action.payload['resume_skills'],
             jobPostingSkills: action.payload['job_skills'],
             scanned: true,
+            loading:false,
             rating: action.payload['match_rate']
         };
+    }
+
+    else if (action.type === actionTypes.LOADING){
+      return{
+        ...state,
+        loading:!state.loading,
+      }
     }
     else {
         return state;

@@ -13,7 +13,7 @@ const Home: React.FC = () => {
     return (
         <React.Fragment>
             <Fade >
-            <Typography variant={"h3"} className={classes.title} component={"h3"} align="center">
+            <Typography variant={"h4"} className={classes.title} component={"h4"} align="center">
                 Scan Your Resume and Job Posting
             </Typography>
             <Typography variant={"h6"} className={classes.subtitle} component={"h6"} align="center">
