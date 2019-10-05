@@ -85,5 +85,6 @@ def flash_match(text, frequencies: FreqDist) ->SkillSet:
     matches =  keyword_processor.extract_keywords(text)
     skill_dictionary = {}
     for match in matches:
-        skill_dictionary[match] = frequencies[match]
+        if frequencies[match] != 0:
+            skill_dictionary[match] = frequencies[match]
     return SkillSet(skill_dictionary)
