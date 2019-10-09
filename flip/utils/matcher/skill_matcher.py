@@ -76,7 +76,7 @@ def flash_match(text, frequencies: FreqDist) ->SkillSet:
     #with open('list.pkl', 'rb') as fs:
     #    my_list = pickle.load(fs)
     my_list = []
-    with open('./linkedin_skills.txt','r', encoding='utf-8') as fs:
+    with open('./linkedin_skill.txt','r', encoding='utf-8') as fs:
         for line in fs.readlines():
             skill = line.strip("\n").lower()
             my_list.append(skill)
