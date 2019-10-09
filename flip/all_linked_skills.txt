@@ -1,4 +1,3 @@
-A
 A + Certified
 A-110
 A-122
@@ -404,7 +403,6 @@ Acoustics
 ACP
 ACPI
 Acquia
-Acquire
 Acquired Brain Injury
 Acquiring
 Acquisition Analysis
@@ -39864,7 +39862,7 @@ Routine
 Routine Maintenance
 Routines
 Routing
-Routing and Remote Access Service 
+Routing and Remote Access Service
 Routing Protocols
 Routing Protocols like RIP
 ROV

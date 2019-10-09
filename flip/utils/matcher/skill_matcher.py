@@ -58,7 +58,7 @@ def match(frequencies: FreqDist) -> SkillSet:
         skill_dictionary[skill.name] = frequencies[skill.name]
     return SkillSet(skill_dictionary)
 
-def fill_index(nlp, filename="./all_linked_skills.txt"):
+def fill_index(nlp, filename="./linked_skills.txt"):
     matcher = PhraseMatcher(nlp.vocab)
     key_words = []
     with open(filename, "r", encoding="utf-8") as fs:

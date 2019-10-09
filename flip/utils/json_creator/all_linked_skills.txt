@@ -20719,7 +20719,6 @@ Hibernate
 Hibernate 3.1
 HID
 Hidden Markov Models
-High
 High Achiever
 High Analytical Skills
 High Availability
@@ -39864,7 +39863,7 @@ Routine
 Routine Maintenance
 Routines
 Routing
-Routing and Remote Access Service 
+Routing and Remote Access Service
 Routing Protocols
 Routing Protocols like RIP
 ROV

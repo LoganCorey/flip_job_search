@@ -19,7 +19,7 @@ class BasicProcessing(ProcessStrategy):
         Tokenizes the text so that the nltk library can be used for
         manipulations
         """
-        tokenized_text = nltk.word_tokenize(text)
+        tokenized_text = nltk.word_tokenize(text.lower())
         return tokenized_text
 
     def _remove_excess(self, tokenized_text: List[str]) -> List:
